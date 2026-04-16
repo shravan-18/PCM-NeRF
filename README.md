@@ -1,4 +1,15 @@
-# PCM-NeRF
+# PCM-NeRF: Probabilistic Camera Modeling for Neural Radiance Fields under Pose Uncertainty
+
+<div align="center">
+<img src="assets/CVPR2026.png" width="75%"/>
+</div>
+
+> **PCM-NeRF: Probabilistic Camera Modeling for Neural Radiance Fields under Pose Uncertainty.**  
+> Shravan Venkatraman\*,  Rakesh Raj\*, Pavan Kumar S\*,
+> Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops 2026  
+> *(\* Equal Contribution)*
+
+<!-- #### [project page](https://shravan-18.github.io/UGPL/) | [paper](https://arxiv.org/abs/2507.14102) -->
 
 Probabilistic Camera Modeling for Neural Radiance Fields under Pose Uncertainty.
 
