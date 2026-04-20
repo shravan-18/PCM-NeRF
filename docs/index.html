@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PCM-NeRF: Probabilistic Camera Modeling for Neural Radiance Fields under Pose Uncertainty</title>
+
+  <!-- Google tag (gtag.js) -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/bulma.min.css">
+  <link rel="stylesheet" href="./css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./css/index.css">
+  <!-- Pending: Add favicon: <link rel="icon" href="./images/favicon.svg"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./js/fontawesome.all.min.js"></script>
+  <script src="./js/bulma-carousel.min.js"></script>
+  <script src="./js/bulma-slider.min.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">PCM-NeRF: Probabilistic Camera Modeling for Neural Radiance Fields under Pose Uncertainty</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Shravan&nbsp;Venkatraman<sup>*</sup><sup>1</sup>,</span>
+            <span class="author-block">
+              Rakesh&nbsp;Raj&nbsp;Madavan<sup>*</sup><sup>2</sup>,</span>
+            <span class="author-block">
+              Pavan Kumar Sathya Venkatesh<sup>*</sup><sup>3</sup>
+            </span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Mohamed bin Zayed University of AI, UAE</span>
+            <span class="author-block"><sup>2</sup>University of Amsterdam, The Netherlands</span>
+            <span class="author-block"><sup>3</sup>University of Massachusetts, Amherst, USA</span>
+          </div>
+          <h2 class="subtitle has-text-centered">
+            <b style="color:tomato;">CVPRW (GenRecon3D) 2026</b>
+          </h2>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link -->
+              <!-- <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener noreferrer">
+                  <span class="icon">
+                    <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+
+              <!-- arXiv Link -->
+              <!-- <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener noreferrer">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+
+              <!-- Code Link -->
+              <span class="link-block">
+                <a href="https://github.com/shravan-18/PCM-NeRF" class="external-link button is-normal is-rounded is-dark" target="_blank" rel="noopener noreferrer">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+        PCM-NeRF, a probabilistic framework that represents each camera pose as a distribution with learnable uncertainty, automatically damping gradient updates for unreliable views and preventing outlier cameras from destabilizing neural surface reconstruction.<br>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<br>
+<center>
+  <div style="display:flex; justify-content:center; align-items:center; gap:16px;">
+    <img src="./assets/teaser_left.png" alt="PCM-NeRF Teaser Left" style="width:490px; height:auto;">
+    <img src="./assets/teaser_right.png" alt="PCM-NeRF Teaser Right" style="width:490px; height:auto;">
+  </div>
+</center>
+<br>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Neural surface reconstruction methods typically treat camera poses as fixed values, assuming perfect accuracy from Structure-from-Motion (SfM) systems. This assumption breaks down with imperfect pose estimates, leading to distorted or incomplete reconstructions. We present <b>PCM-NeRF</b>, a probabilistic framework that augments neural surface reconstruction with per-camera learnable uncertainty, built directly on SG-NeRF. Rather than treating all cameras equally throughout optimization, we represent each pose as a distribution with a learnable mean and variance, initialized from SfM correspondence quality. An uncertainty regularization loss couples the learned variance to view confidence — derived from both geometric correspondences and rendering quality — and the resulting uncertainty directly modulates the effective pose learning rate: uncertain cameras receive damped gradient updates, preventing poorly initialized views from corrupting the reconstruction. Experiments on challenging scenes with severe pose outliers demonstrate that PCM-NeRF consistently outperforms state-of-the-art methods in both Chamfer Distance and F-Score, particularly for geometrically complex structures, without requiring foreground masks.
+          </p>
+          <br>
+          <h2 class="title is-3"><center>Contributions</center></h2>
+          <ul>
+            <li>We introduce a probabilistic per-camera pose representation for NSR in which each pose is modeled as a distribution in SE(3) with a learnable mean and per-axis variance, initialized from SfM correspondence quality and evolved jointly with the scene.</li>
+            <li>We derive an uncertainty-modulated pose learning rate that inversely scales each camera's effective gradient step by its learned uncertainty, automatically preventing outlier views from destabilizing reconstruction without manual filtering or threshold selection.</li>
+            <li>We propose a cross-modal consistency loss that aligns learned variance parameters with view confidence derived from both geometric correspondences and rendering quality, anchoring uncertainty to observable evidence rather than rendering gradients alone.</li>
+            <li>We demonstrate state-of-the-art surface reconstruction on challenging outlier-pose scenes, achieving the lowest Chamfer Distance on 6 of 8 scenes and the highest F-Score on 6 of 8 scenes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<br>
+<center>
+  <img src="./assets/pipeline.png" alt="PCM-NeRF Pipeline Overview" style="width:900px;">
+</center>
+<br>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Method -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3"><b>PCM-NeRF: Method</b></h2>
+        <div class="content has-text-justified">
+          <p>
+            PCM-NeRF builds directly on SG-NeRF, extending gradient-based pose refinement with a lightweight probabilistic pose representation. Each camera pose <i>P<sub>i</sub></i> is modeled as a distribution in SE(3) with learnable mean μ<sub>i</sub> = (<i>r<sub>i</sub></i>, <i>t<sub>i</sub></i>) and diagonal covariance Σ<sub>i</sub> = diag(σ²<sub>r,i</sub>, σ²<sub>t,i</sub>), parameterized in log-space for numerical stability. All rendering uses the mean pose directly — adding no inference-time overhead — while the variance parameters are optimized through the uncertainty regularization loss.
+          </p>
+          <p>
+            View reliability is estimated from SfM correspondence density and a rolling buffer of per-camera PSNR scores, blended as γ<sub>i</sub><sup>(t)</sup> = (1−α)γ<sub>i</sub><sup>(0)</sup> + α·γ̂<sub>i</sub><sup>(t)</sup> with α = 0.7. The uncertainty regularization loss encourages σ̄<sub>i</sub> ≈ (1−γ<sub>i</sub>), and the learned uncertainty modulates the effective pose learning rate: η<sub>i</sub><sup>pose</sup> = η₀ / (1 + σ̄<sub>i</sub> · κ), where κ = 5.0. Geometric consistency is enforced via the volumetric IoU loss over Mixture-of-Gaussian density distributions along matched rays, inherited from SG-NeRF.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+<center>
+  <img src="./assets/uncertainty_loop.png" alt="Uncertainty Feedback Loop" style="width:800px;">
+</center>
+<br>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Qualitative Results -->
+    <h2 class="title is-3 has-text-centered"><b>Qualitative Results</b></h2>
+    <br>
+    <center>
+      <img src="./assets/qualitative_comparisons.png" alt="Qualitative Comparisons" style="width:1200px;">
+    </center>
+    <p class="has-text-centered is-size-6" style="margin-top:10px;">
+      Qualitative comparison across Clock, Deaf, and Farmer scenes. PCM-NeRF recovers finer geometric detail compared to all baselines, particularly in regions where outlier pose initialization corrupts reconstruction.
+    </p>
+    <br>
+
+    <!-- Weight Sensitivity -->
+    <h2 class="title is-3 has-text-centered"><b>Hyperparameter Sensitivity</b></h2>
+    <br>
+    <center>
+      <img src="./assets/weight_sensitivity.png" alt="Weight Sensitivity Analysis" style="width:900px;">
+    </center>
+    <p class="has-text-centered is-size-6" style="margin-top:10px;">
+      Effect of IoU weight (λ<sub>IoU</sub>) and uncertainty weight (λ<sub>unc</sub>) on Chamfer Distance and F-Score. Best results are achieved at λ<sub>IoU</sub> = 0.2 and λ<sub>unc</sub> = 0.05.
+    </p>
+    <br>
+
+    <!-- Ablation Study -->
+    <h2 class="title is-3 has-text-centered"><b>Ablation Study: Component Contributions</b></h2>
+    <br>
+    Results averaged across all 8 scenes. Both the probabilistic uncertainty module and the feature correspondence structure contribute positively; the best performance is achieved only when both are active together.
+    <br><br>
+
+    <center>
+      <table border="1" cellspacing="0" cellpadding="10" style="border-collapse:collapse; text-align:center; width:55%; font-family:Arial, sans-serif; font-size:15px;">
+        <thead>
+          <tr style="background:#f0f0f0;">
+            <th>Prob. Uncertainty</th>
+            <th>Feature Corr.</th>
+            <th>CD ↓</th>
+            <th>F-Score ↑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>✗</td><td>✗</td>
+            <td>1.18</td><td>0.72</td>
+          </tr>
+          <tr>
+            <td>✓</td><td>✗</td>
+            <td>1.33</td><td>0.68</td>
+          </tr>
+          <tr>
+            <td>✗</td><td>✓</td>
+            <td>0.46</td><td>0.85</td>
+          </tr>
+          <tr style="background:#d9d9d9; font-weight:bold;">
+            <td>✓</td><td>✓</td>
+            <td>0.32</td><td>0.93</td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <br>
+
+    <!-- Quantitative Results -->
+    <h2 class="title is-3 has-text-centered"><b>Quantitative Comparison</b></h2>
+    <br>
+    Chamfer Distance (↓) across all 8 scenes. PCM-NeRF achieves the best result on 6 of 8 scenes, reducing mean CD by 28.8% relative to SG-NeRF and improving mean F-Score from 0.85 to 0.93.
+    <br><br>
+
+    <center>
+      <table border="1" cellspacing="0" cellpadding="10" style="border-collapse:collapse; text-align:center; width:100%; font-family:Arial, sans-serif; font-size:14px;">
+        <thead>
+          <tr style="background:#f0f0f0;">
+            <th>Method</th>
+            <th>Baby</th><th>Bear</th><th>Bell</th><th>Clock</th>
+            <th>Deaf</th><th>Farmer</th><th>Pavilion</th><th>Sculpture</th>
+            <th>Mean CD ↓</th><th>Mean F ↑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>NeuS</td>
+            <td>0.69</td><td>0.31</td><td>3.33</td><td>1.16</td>
+            <td>0.55</td><td>2.49</td><td>0.29</td><td>0.66</td>
+            <td>1.19</td><td>0.73</td>
+          </tr>
+          <tr>
+            <td>Neuralangelo</td>
+            <td>0.70</td><td>0.65</td><td>—</td><td>0.38</td>
+            <td>0.59</td><td>4.89</td><td>1.95</td><td>0.31</td>
+            <td>—</td><td>—</td>
+          </tr>
+          <tr>
+            <td>BARF</td>
+            <td>1.08</td><td>0.28</td><td>3.31</td><td>0.19</td>
+            <td>0.46</td><td>2.13</td><td>0.38</td><td>0.57</td>
+            <td>1.05</td><td>0.73</td>
+          </tr>
+          <tr>
+            <td>SCNeRF</td>
+            <td>1.19</td><td>0.27</td><td>3.74</td><td>1.33</td>
+            <td>0.46</td><td>1.45</td><td>0.23</td><td>0.81</td>
+            <td>1.19</td><td>0.66</td>
+          </tr>
+          <tr>
+            <td>GARF</td>
+            <td>2.04</td><td>2.25</td><td>3.09</td><td>0.50</td>
+            <td>0.59</td><td>1.58</td><td>0.96</td><td>0.57</td>
+            <td>1.45</td><td>0.70</td>
+          </tr>
+          <tr>
+            <td>L2G-NeRF</td>
+            <td>1.15</td><td>0.29</td><td>1.26</td><td>0.24</td>
+            <td>0.40</td><td>2.18</td><td>0.46</td><td>0.37</td>
+            <td>0.79</td><td>0.76</td>
+          </tr>
+          <tr>
+            <td>Joint-TensoRF</td>
+            <td>3.11</td><td>1.22</td><td>2.49</td><td>0.36</td>
+            <td>0.36</td><td>2.51</td><td>1.35</td><td>0.70</td>
+            <td>1.51</td><td>0.59</td>
+          </tr>
+          <tr>
+            <td>SG-NeRF</td>
+            <td>0.56</td><td>0.25</td><td>0.98</td><td><b>0.15</b></td>
+            <td>0.45</td><td>0.87</td><td><b>0.20</b></td><td>0.22</td>
+            <td>0.46</td><td>0.85</td>
+          </tr>
+          <tr style="background:#d9d9d9; font-weight:bold;">
+            <td>Ours (PCM-NeRF)</td>
+            <td>0.25</td><td>0.24</td><td>0.51</td><td>0.16</td>
+            <td>0.23</td><td>0.79</td><td>0.24</td><td>0.20</td>
+            <td>0.33</td><td>0.93</td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <p class="has-text-centered is-size-6" style="margin-top:10px;">
+      Chamfer Distance ↓ per scene. Bold = best per column. PCM-NeRF achieves the lowest CD on 6 of 8 scenes.
+    </p>
+    <br>
+
+  </div>
+</section>
+
+
+<!-- BibTeX -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    
+    <pre><code>@inproceedings{pcmnerf2026,
+  title     = {PCM-NeRF: Probabilistic Camera Modeling for Neural Radiance Fields under Pose Uncertainty},
+  author    = {Venkatraman, Shravan and Madavan, Rakesh Raj and {Pavan Kumar S}},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)},
+  year      = {2026}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            This means you are free to borrow the <a
+              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
+            we just ask that you link back to this page in the footer.
+            Please remember to remove the analytics code included in the header of the website which
+            you do not want on your website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
